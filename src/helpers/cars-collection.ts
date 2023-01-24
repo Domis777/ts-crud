@@ -21,15 +21,16 @@ class CarsCollection {
         const carsModel = modelArr.find((model) => model.id === modelID);
         const carsBrand = brandArr.find((brand) => brand.id === carsModel?.brandID);
 
-        console.log(carsBrand);
-        console.log(carsModel);
-
         return {
             ...car,
             brand: (carsBrand && carsBrand.title) ?? 'unknown',
             model: (carsModel && carsModel.title) ?? 'unknown',
         };
     };
+
+    public get all(): CarJoined[] {
+        return this.props.carArr.map(this.joinCars);
+    }
 }
 
 export default CarsCollection;
