@@ -1,6 +1,6 @@
 type Car = {
     id: string,
-    modelID: string,
+    modelId: string,
     price: number,
     year: number,
 };

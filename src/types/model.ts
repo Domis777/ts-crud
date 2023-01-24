@@ -1,6 +1,6 @@
 type Model = {
     id: string,
-    brandID: string,
+    brandId: string,
     title: string,
 };
 

@@ -4,9 +4,9 @@ import type Model from '../types/model';
 import type CarJoined from '../types/car-joined';
 
 type CarsCollectionProps = {
-    carArr: Car[],
-    brandArr: Brand[],
-    modelArr: Model[],
+    cars: Car[],
+    brands: Brand[],
+    models: Model[],
 };
 
 class CarsCollection {
@@ -16,10 +16,10 @@ class CarsCollection {
         this.props = props;
     }
 
-    private joinCars = ({ modelID, ...car }: Car) => {
-        const { brandArr, modelArr } = this.props;
-        const carsModel = modelArr.find((model) => model.id === modelID);
-        const carsBrand = brandArr.find((brand) => brand.id === carsModel?.brandID);
+    private joinCars = ({ modelId, ...car }: Car) => {
+        const { brands, models } = this.props;
+        const carsModel = models.find((model) => model.id === modelId);
+        const carsBrand = brands.find((brand) => brand.id === carsModel?.brandId);
 
         return {
             ...car,
@@ -29,7 +29,7 @@ class CarsCollection {
     };
 
     public get all(): CarJoined[] {
-        return this.props.carArr.map(this.joinCars);
+        return this.props.cars.map(this.joinCars);
     }
 }
 
