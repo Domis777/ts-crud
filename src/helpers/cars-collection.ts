@@ -1,7 +1,7 @@
-import type Car from '../types/car'
-import type Brand from '../types/brand'
-import type Model from '../types/model'
-import type CarJoined from '../types/car-joined'
+import type Car from '../types/car';
+import type Brand from '../types/brand';
+import type Model from '../types/model';
+import type CarJoined from '../types/car-joined';
 
 type CarsCollectionProps = {
     carArr: Car[],
@@ -11,7 +11,7 @@ type CarsCollectionProps = {
 
 class CarsCollection {
     private props: CarsCollectionProps;
-    
+
     constructor(props: CarsCollectionProps) {
         this.props = props;
     }
@@ -21,12 +21,15 @@ class CarsCollection {
         const carsModel = modelArr.find((model) => model.id === modelID);
         const carsBrand = brandArr.find((brand) => brand.id === carsModel?.brandID);
 
+        console.log(carsBrand);
+        console.log(carsModel);
+
         return {
             ...car,
             brand: (carsBrand && carsBrand.title) ?? 'unknown',
             model: (carsModel && carsModel.title) ?? 'unknown',
-        }
-    }
+        };
+    };
 }
 
 export default CarsCollection;
