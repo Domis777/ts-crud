@@ -1,4 +1,4 @@
-type TableProps<Type> = {
+export type TableProps<Type> = {
     title: string,
     column: Type,
     rowsData: type[],
@@ -15,7 +15,22 @@ class Table{
         this.htmlElement = document.createElement('table');
         this.thead = document.createElement('thead');
         this.tbody = document.createElement('tbody');
+        
+        this.initialize();
     }
 
-    this.initialize();
+    private initializeThead = (): void => {
+        const { title, column } = this.props;
+
+        const theadArr = Object.values(columns);
+        const theadRowHtmlStr = theadArr.map((thead) => `<th>${thead}</th>`).join('');
+
+        this.thead.innerHTML = 
+        `<tr>
+            <th>${title}</th>
+        </tr>
+        <tr>${theadRowHtmlStr}</tr>`;
+    }
 }
+
+export default Table;
