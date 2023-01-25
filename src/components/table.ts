@@ -1,3 +1,9 @@
+type TableProps<Type> = {
+    title: string,
+    column: Type,
+    rowsData: type[],
+}
+
 class Table{
     public htmlElement: HTMLTableElement;
     private thead: HTMLTableSectionElement;
