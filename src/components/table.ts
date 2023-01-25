@@ -27,6 +27,23 @@ class Table<Type extends RowData> {
         this.initialize();
     }
 
+    private columnCompatability = (): void => {
+        const { rowsData, columns } = this.props;
+
+        if (this.props.rowsData.length === 0) return;
+        const columnsCount = ;
+
+        const columnCompatabilityWhitRowsData = rowsData.every(
+            (row) => {
+                const rowCellsCount = ;
+                return rowCellsCount === columnsCount;
+            },
+        );
+        if (!columnCompatabilityWhitRowsData) {
+            throw new Error('Wrong column number whit cell number');
+        }
+    };
+
     private initializeThead = (): void => {
         const { title, columns } = this.props;
 
