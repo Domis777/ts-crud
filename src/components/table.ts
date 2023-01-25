@@ -1,10 +1,15 @@
+type RowData = {
+    id: string,
+    [key: string]: string,
+}
+
 export type TableProps<Type> = {
     title: string,
     column: Type,
     rowsData: Type[],
 }
 
-class Table<>{
+class Table<Type extends RowData>{
     public htmlElement: HTMLTableElement;
     private props: TableProps<Type>;
     private thead: HTMLTableSectionElement;
@@ -20,9 +25,9 @@ class Table<>{
     }
 
     private initializeThead = (): void => {
-        const { title, columns } = this.props;
+        const { title, column } = this.props;
 
-        const theadArr = Object.values(columns);
+        const theadArr = Object.values(column);
         const theadRowHtmlStr = theadArr.map((thead) => `<th>${thead}</th>`).join('');
 
         this.thead.innerHTML = 
