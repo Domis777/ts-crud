@@ -1,3 +1,5 @@
+import countObjProperties from '../helpers/count-object-properties';
+
 type RowData = {
     id: string,
     [key: string]: string,
@@ -31,11 +33,11 @@ class Table<Type extends RowData> {
         const { rowsData, columns } = this.props;
 
         if (this.props.rowsData.length === 0) return;
-        const columnsCount = ;
+        const columnsCount = countObjProperties(columns);
 
         const columnCompatabilityWhitRowsData = rowsData.every(
             (row) => {
-                const rowCellsCount = ;
+                const rowCellsCount = countObjProperties(row);
                 return rowCellsCount === columnsCount;
             },
         );
