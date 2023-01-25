@@ -3,6 +3,7 @@ import cars from '../data/cars';
 import brands from '../data/brands';
 import models from '../data/models';
 import Table from './table';
+import strProps from '../helpers/stringify-objects';
 
 class App {
   private htmlElement: HTMLElement;
@@ -28,7 +29,7 @@ class App {
       price: 'Price',
       year: 'Year',
     },
-    rowsData: this.carsCollection.all.map();
+    rowsData: this.carsCollection.all.map(strProps),
    });
 
    const container = document.createElement('div');
