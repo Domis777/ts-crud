@@ -34,7 +34,7 @@ class Table<Type extends RowData> {
         const theadRowHtmlStr = theadArr.map((thead) => `<th>${thead}</th>`).join('');
 
         this.thead.innerHTML = `<tr>
-            <th>${title}</th>
+            <th colspan="${theadArr.length}" class="text-center" h3>${title}</th>
         </tr>
         <tr>${theadRowHtmlStr}</tr>`;
     };
