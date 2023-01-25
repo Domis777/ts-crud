@@ -1,41 +1,43 @@
 type RowData = {
     id: string,
     [key: string]: string,
-}
+};
 
 export type TableProps<Type> = {
     title: string,
-    column: Type,
+    columns: Type,
     rowsData: Type[],
-}
+};
 
-class Table<Type extends RowData>{
+class Table<Type extends RowData> {
     public htmlElement: HTMLTableElement;
+
     private props: TableProps<Type>;
+
     private thead: HTMLTableSectionElement;
+
     private tbody: HTMLTableSectionElement;
 
-    public constructor(props: TableProps<Type>){
-        this.props = props
+    public constructor(props: TableProps<Type>) {
+        this.props = props;
         this.htmlElement = document.createElement('table');
         this.thead = document.createElement('thead');
         this.tbody = document.createElement('tbody');
-        
+
         this.initialize();
     }
 
     private initializeThead = (): void => {
-        const { title, column } = this.props;
+        const { title, columns } = this.props;
 
-        const theadArr = Object.values(column);
+        const theadArr = Object.values(columns);
         const theadRowHtmlStr = theadArr.map((thead) => `<th>${thead}</th>`).join('');
 
-        this.thead.innerHTML = 
-        `<tr>
+        this.thead.innerHTML = `<tr>
             <th>${title}</th>
         </tr>
         <tr>${theadRowHtmlStr}</tr>`;
-    }
+    };
 
     private initialize = (): void => {
         this.initializeThead();

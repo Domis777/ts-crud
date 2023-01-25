@@ -2,6 +2,7 @@ import CarsCollection from '../helpers/cars-collection';
 import cars from '../data/cars';
 import brands from '../data/brands';
 import models from '../data/models';
+import Table from './table';
 
 class App {
   private htmlElement: HTMLElement;
@@ -18,11 +19,23 @@ class App {
   }
 
   initialize = (): void => {
-    const container = document.createElement('div');
-    container.className = 'container my-5';
-    container.innerHTML = 'Laukiu kol būsiu sukurtas';
+   const carTable = new Table({
+    title: 'All CARS',
+    columns: {
+      id: 'Id',
+      brand: 'Brand',
+      model: 'Model',
+      price: 'Price',
+      year: 'Year',
+    },
+    rowsData: this.carsCollection.all.map();
+   });
 
-    this.htmlElement.append(container);
+   const container = document.createElement('div');
+   container.className = 'container my-5',
+   container.appendChild(carTable.htmlElement);
+
+   this.htmlElement.append(container);
   };
 }
 
