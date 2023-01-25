@@ -1,10 +1,10 @@
 export type TableProps<Type> = {
     title: string,
     column: Type,
-    rowsData: type[],
+    rowsData: Type[],
 }
 
-class Table{
+class Table<>{
     public htmlElement: HTMLTableElement;
     private props: TableProps<Type>;
     private thead: HTMLTableSectionElement;
@@ -20,7 +20,7 @@ class Table{
     }
 
     private initializeThead = (): void => {
-        const { title, column } = this.props;
+        const { title, columns } = this.props;
 
         const theadArr = Object.values(columns);
         const theadRowHtmlStr = theadArr.map((thead) => `<th>${thead}</th>`).join('');
@@ -31,6 +31,15 @@ class Table{
         </tr>
         <tr>${theadRowHtmlStr}</tr>`;
     }
+
+    private initialize = (): void => {
+        this.initializeThead();
+
+        this.htmlElement.className = 'table table-striped order border p-3';
+        this.htmlElement.append(
+            this.thead,
+        );
+    };
 }
 
 export default Table;
