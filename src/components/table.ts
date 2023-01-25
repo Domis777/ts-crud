@@ -39,12 +39,33 @@ class Table<Type extends RowData> {
         <tr>${theadRowHtmlStr}</tr>`;
     };
 
+    private initializeTbody = (): void => {
+        const { rowsData, columns } = this.props;
+
+        this.tbody.innerHTML = '';
+        const rowsHtlmElements = rowsData.map(
+            (rowData) => {
+                const rowHtmlElement = document.createElement('tr');
+                const cellsHtmlString = Object.keys(columns).map(
+                    (key) => `<td>${rowData[key]}</td>`,
+                ).join(' ');
+
+                rowHtmlElement.innerHTML = cellsHtmlString;
+                return rowHtmlElement;
+            },
+        );
+
+        this.tbody.append(...rowsHtlmElements);
+    };
+
     private initialize = (): void => {
         this.initializeThead();
+        this.initializeTbody();
 
         this.htmlElement.className = 'table table-striped order border p-3';
         this.htmlElement.append(
             this.thead,
+            this.tbody,
         );
     };
 }
