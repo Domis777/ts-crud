@@ -33,7 +33,7 @@ class App {
    });
 
    const container = document.createElement('div');
-   container.className = 'container my-5',
+   container.className = 'container my-5';
    container.appendChild(carTable.htmlElement);
 
    this.htmlElement.append(container);
