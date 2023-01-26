@@ -22,6 +22,8 @@ class Table<Type extends RowData> {
 
     public constructor(props: TableProps<Type>) {
         this.props = props;
+        this.columnCompatability();
+
         this.htmlElement = document.createElement('table');
         this.thead = document.createElement('thead');
         this.tbody = document.createElement('tbody');
