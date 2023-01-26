@@ -4,6 +4,7 @@ import brands from '../data/brands';
 import models from '../data/models';
 import Table from './table';
 import strProps from '../helpers/stringify-objects';
+import SelectField from './select-field';
 
 class App {
   private htmlElement: HTMLElement;
@@ -20,6 +21,8 @@ class App {
   }
 
   initialize = (): void => {
+    const select = new SelectField();
+
    const carTable = new Table({
     title: 'All CARS',
     columns: {
@@ -33,8 +36,11 @@ class App {
    });
 
    const container = document.createElement('div');
-   container.className = 'container my-5';
-   container.appendChild(carTable.htmlElement);
+   container.className = 'container d-flex flex-column my-5 gap-3';
+   container.append(
+    select.htmlElement,
+    carTable.htmlElement,
+    );
 
    this.htmlElement.append(container);
   };
