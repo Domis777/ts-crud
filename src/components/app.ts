@@ -26,9 +26,9 @@ class App {
     this.htmlElement = foundElement;
   }
 
-  handleOptionBrands = (brandId: string) => {
-    console.log(brandId);
-    console.log(this);
+  handleOptionBrands = (carId: string) => {
+    const filteredBrands = this.carsCollection.getByBrandId(carId);
+    console.log(filteredBrands);
   };
 
   initialize = (): void => {
