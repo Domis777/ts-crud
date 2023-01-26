@@ -5,7 +5,7 @@ export type Option = {
 
 type SelectFieldProps = {
     options: Option[],
-    ChangeOption: () => void,
+    ChangeOption: (value: string) => void,
 };
 
 class SelectField {
@@ -26,7 +26,10 @@ class SelectField {
         .map(({ value, text }) => `
         <option value="${value}">${text}</option>
         `).join('');
-        this.htmlElement.addEventListener('change', this.props.ChangeOption);
+        this.htmlElement.addEventListener(
+            'change',
+             () => this.props.ChangeOption(this.htmlElement.value),
+        );
     };
 }
 

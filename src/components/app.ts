@@ -26,9 +26,9 @@ class App {
     this.htmlElement = foundElement;
   }
 
-  handleOptionBrands = () => {
+  handleOptionBrands = (brandId: string) => {
+    console.log(brandId);
     console.log(this);
-    console.log('Change Option');
   };
 
   initialize = (): void => {
