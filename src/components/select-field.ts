@@ -4,24 +4,30 @@ type Option = {
 };
 
 type SelectFieldProps = {
-    options: Option[]
+    options: Option[],
+    ChangeOption: () => void,
 };
 
 class SelectField {
-    private options: Option[];
+    private props: SelectFieldProps;
 
     public htmlElement: HTMLSelectElement;
 
-    constructor({ options }: SelectFieldProps) {
+    constructor(props: SelectFieldProps) {
         this.htmlElement = document.createElement('select');
-        this.htmlElement.className = 'form-select';
-        this.options = options;
-        this.htmlElement.innerHTML = `
-        <option value="">BMW</option>
-        <option value="">Volvo</option>
-        <option value="">Audi</option>
-        `;
+        this.props = props;
+
+        this.initialize();
     }
+
+    initialize = () => {
+        this.htmlElement.className = 'form-select';
+        this.htmlElement.innerHTML = this.props.options
+        .map(({ value, text }) => `
+        <option value="${value}">${text}</option>
+        `).join('');
+        this.htmlElement.addEventListener('change', this.props.ChangeOption);
+    };
 }
 
 export default SelectField;
