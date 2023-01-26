@@ -28,7 +28,7 @@ class App {
 
   handleOptionBrands = (carId: string) => {
     const filteredBrands = this.carsCollection.getByBrandId(carId);
-    console.log(filteredBrands);
+    console.table(filteredBrands);
   };
 
   initialize = (): void => {
