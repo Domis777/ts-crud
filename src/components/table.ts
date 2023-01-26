@@ -48,7 +48,7 @@ class Table<Type extends RowData> {
         }
     };
 
-    private initializeThead = (): void => {
+    private renderThead = (): void => {
         const { title, columns } = this.props;
 
         const theadArr = Object.values(columns);
@@ -60,7 +60,7 @@ class Table<Type extends RowData> {
         <tr>${theadRowHtmlStr}</tr>`;
     };
 
-    private initializeTbody = (): void => {
+    private renderTbody = (): void => {
         const { rowsData, columns } = this.props;
 
         this.tbody.innerHTML = '';
@@ -80,14 +80,18 @@ class Table<Type extends RowData> {
     };
 
     private initialize = (): void => {
-        this.initializeThead();
-        this.initializeTbody();
-
         this.htmlElement.className = 'table table-striped order border p-3';
         this.htmlElement.append(
             this.thead,
             this.tbody,
         );
+
+        this.renderView();
+    };
+
+    renderView = () => {
+        this.renderThead();
+        this.renderTbody();
     };
 
     updateProps = (props: Partial<TableProps<Type>>) => {
@@ -95,6 +99,8 @@ class Table<Type extends RowData> {
             ...this.props,
             ...props,
         };
+
+        this.renderView();
     };
 }
 
