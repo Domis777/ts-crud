@@ -61,12 +61,19 @@ class Table<Type extends RowData> {
         const { title, columns } = this.props;
 
         const theadArr = Object.values(columns);
-        const theadRowHtmlStr = theadArr.map((thead) => `<th>${thead}</th>`).join('');
+        const theadRowHtmlStr = theadArr.map((thead) => `<th class="bg-dark text-white">${thead}</th>`).join('');
 
-        this.thead.innerHTML = `<tr>
-            <th colspan="${theadArr.length}" class="text-center" h3>${title}</th>
+        const columnLenght = theadArr.length + 1;
+
+        this.thead.className = 'bg-dark text-white';
+        this.thead.innerHTML = `
+        <tr class="text-center h3">
+            <th colspan="${columnLenght}">${title}</th>
         </tr>
-        <tr>${theadRowHtmlStr}</tr>`;
+        <tr>
+            ${theadRowHtmlStr}
+            <th></th>
+        </tr>`;
     };
 
     private renderTbody = (): void => {
@@ -77,10 +84,17 @@ class Table<Type extends RowData> {
             (rowData) => {
                 const rowHtmlElement = document.createElement('tr');
                 const cellsHtmlString = Object.keys(columns).map(
-                    (key) => `<td>${rowData[key]}</td>`,
+                    (key) => `
+                    <td>${rowData[key]}</td>
+                    `,
                 ).join(' ');
 
-                rowHtmlElement.innerHTML = cellsHtmlString;
+                rowHtmlElement.innerHTML = `${cellsHtmlString}
+                    <td>
+                    <button class="btn btn-danger btn-sm text-white fw-bolder">
+                    ✕</button>
+                    </td>`;
+
                 return rowHtmlElement;
             },
         );
