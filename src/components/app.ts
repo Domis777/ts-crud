@@ -45,9 +45,9 @@ class App {
   }
 
   private handleBrandChange = (carId: string): void => {
-    const filteredBrands = carId;
-    console.log(this);
-    console.log(filteredBrands);
+    this.selectedBrandId = carId;
+
+    this.update();
   };
 
   public initialize = (): void => {
@@ -70,12 +70,19 @@ class App {
   };
 
   private update = (): void => {
-    const { carsCollection } = this;
+    const { selectedBrandId, carsCollection } = this;
 
     if (this.selectedBrandId === '-1') {
       this.carsTable.updateProps({
         title: 'All Cars',
         rowsData: carsCollection.all.map(strProps),
+      });
+    } else {
+      this.carsTable.updateProps({
+        title: 'All Cars',
+        rowsData: carsCollection
+        .getByBrandId(selectedBrandId)
+        .map(strProps),
       });
     }
   };
