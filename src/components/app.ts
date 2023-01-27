@@ -78,8 +78,10 @@ class App {
         rowsData: carsCollection.all.map(strProps),
       });
     } else {
+      const brand = this.carsCollection.getBrandTitleById(selectedBrandId);
+
       this.carsTable.updateProps({
-        title: 'All Cars',
+        title: brand.title,
         rowsData: carsCollection
         .getByBrandId(selectedBrandId)
         .map(strProps),
