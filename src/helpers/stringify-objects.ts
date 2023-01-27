@@ -1,4 +1,4 @@
-type StrObjProps<Type extends Object> = {
+export type StrObjProps<Type extends Object> = {
     [key in keyof Type]: string;
 };
 

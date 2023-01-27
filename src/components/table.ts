@@ -29,7 +29,16 @@ class Table<Type extends RowData> {
         this.tbody = document.createElement('tbody');
 
         this.initialize();
+        this.renderView();
     }
+
+    private initialize = (): void => {
+        this.htmlElement.className = 'table table-striped order border p-3';
+        this.htmlElement.append(
+            this.thead,
+            this.tbody,
+        );
+    };
 
     private columnCompatability = (): void => {
         const { rowsData, columns } = this.props;
@@ -42,8 +51,8 @@ class Table<Type extends RowData> {
                 const rowCellsCount = countObjProperties(row);
                 return rowCellsCount === columnsCount;
             },
-        );
-        if (!columnCompatabilityWhitRowsData) {
+            );
+            if (!columnCompatabilityWhitRowsData) {
             throw new Error('Wrong column number whit cell number');
         }
     };
@@ -77,16 +86,6 @@ class Table<Type extends RowData> {
         );
 
         this.tbody.append(...rowsHtlmElements);
-    };
-
-    private initialize = (): void => {
-        this.htmlElement.className = 'table table-striped order border p-3';
-        this.htmlElement.append(
-            this.thead,
-            this.tbody,
-        );
-
-        this.renderView();
     };
 
     renderView = () => {
