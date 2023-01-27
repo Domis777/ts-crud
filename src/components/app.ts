@@ -1,12 +1,12 @@
-import CarsCollection from '../helpers/cars-collection';
 import cars from '../data/cars';
 import brands from '../data/brands';
 import models from '../data/models';
 import Table from './table';
-import strProps, { type StrObjProps } from '../helpers/stringify-objects';
-import SelectField, { type Option } from './select-field';
+import CarsCollection from '../helpers/cars-collection';
 import type Brand from '../types/brand';
 import type CarJoined from '../types/car-joined';
+import strProps, { type StrObjProps } from '../helpers/stringify-objects';
+import SelectField, { type Option } from './select-field';
 
 const ALL_BRAND_ID = '-1' as const;
 const ALL_BRAND_TITLE = 'All Cars';

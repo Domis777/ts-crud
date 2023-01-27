@@ -1,8 +1,8 @@
+import brands from '../data/brands';
 import type Car from '../types/car';
 import type Brand from '../types/brand';
 import type Model from '../types/model';
 import type CarJoined from '../types/car-joined';
-import brands from '../data/brands';
 
 type CarsCollectionProps = {
     cars: Car[],
