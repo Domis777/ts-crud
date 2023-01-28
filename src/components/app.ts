@@ -54,7 +54,7 @@ class App {
     this.update();
   };
 
-  handleCarDelete = (brandId: string) => {
+  private handleCarDelete = (brandId: string) => {
     this.carsCollection.deleteCarById(brandId);
     this.update();
   };
@@ -87,7 +87,7 @@ class App {
         rowsData: carsCollection.all.map(strProps),
       });
     } else {
-      const brand = this.carsCollection.getBrandTitleById(selectedBrandId);
+      const brand = this.carsCollection.getByBrandTitleId(selectedBrandId);
 
       this.carsTable.updateProps({
         title: brand.title,

@@ -32,7 +32,7 @@ class CarsCollection {
         return this.props.cars.map(this.joinCars);
     }
 
-    getByBrandId = (brandId: string): CarJoined[] => {
+    public getByBrandId = (brandId: string): CarJoined[] => {
         const { cars, models } = this.props;
 
         const brandModelIds = models
@@ -47,7 +47,7 @@ class CarsCollection {
         return carsModelIds;
     };
 
-    getBrandTitleById = (brandId: string) => {
+    public getByBrandTitleId = (brandId: string) => {
         const { brands } = this.props;
 
         const foundBrand = brands.find((b) => b.id === brandId);
@@ -57,7 +57,7 @@ class CarsCollection {
       return foundBrand;
     };
 
-    deleteCarById = (brandId: string) => {
+    public deleteCarById = (brandId: string) => {
         const { cars, models } = this.props;
 
         this.props.cars = cars.filter((car) => car.id !== brandId);
