@@ -34,7 +34,28 @@ class CarForm {
         this.props = props
         this.htmlElement = document.createElement('form')
 
-
+        this.fields = {
+          brand: new SelectField({
+            name: 'brand',
+            labelText: 'Markė',
+            options: brands.map(({ id, title }) => ({ text: title, value: id })),
+          }),
+          model: new SelectField({
+            name: 'model',
+            labelText: 'Modelis',
+            options: models.map(({ id, title }) => ({ text: title, value: id })),
+          }),
+          price: new TextField({
+            name: 'price',
+            labelText: 'Kaina',
+            value: '',
+          }),
+          year: new TextField({
+            name: 'year',
+            labelText: 'Metai',
+            value: '',
+          }),
+        };
 
         this.initialize();
         this.renderView();
