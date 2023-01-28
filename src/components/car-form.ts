@@ -10,7 +10,7 @@ export type Values = {
     year: string,
   };
 
-type CarFormProps {
+type CarFormProps = {
     values: Values,
     title: string,
     submitBtnText: string,
@@ -28,9 +28,13 @@ class CarForm {
 
     public htmlElement: HTMLFormElement;
 
+    private fields: Fields;
+
     constructor(props: CarFormProps) {
         this.props = props
         this.htmlElement = document.createElement('form')
+
+
 
         this.initialize();
         this.renderView();

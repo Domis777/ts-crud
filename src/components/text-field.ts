@@ -1,5 +1,5 @@
 export type TextFieldProps = {
-    lableText: string,
+    labelText: string,
     name: string,
     value: string,
 }
@@ -49,7 +49,7 @@ class TextField {
         const { label, input, props } = this;
 
         input.name = props.name
-        label.innerHTML = props.lableText;
+        label.innerHTML = props.labelText;
         
         input.value = props.value;
     }

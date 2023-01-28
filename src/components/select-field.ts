@@ -4,8 +4,11 @@ export type Option = {
 };
 
 type SelectFieldProps = {
-    options: Option[],
-    onChange: (value: string) => void,
+  options: Option[],
+  onChange?: (newValue: string) => void,
+  name?: string,
+  labelText?: string,
+  value?: string,
 };
 
 class SelectField {
