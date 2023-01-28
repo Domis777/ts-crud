@@ -9,6 +9,7 @@ export type TableProps<Type> = {
     title: string,
     columns: Type,
     rowsData: Type[],
+    onDelete: (id: string) => void
 };
 
 class Table<Type extends RowData> {
@@ -79,27 +80,27 @@ class Table<Type extends RowData> {
     private renderTbody = (): void => {
         const { rowsData, columns } = this.props;
 
-        this.tbody.innerHTML = '';
-        const rowsHtlmElements = rowsData.map(
+        const rows = rowsData.map(
             (rowData) => {
-                const rowHtmlElement = document.createElement('tr');
-                const cellsHtmlString = Object.keys(columns).map(
-                    (key) => `
-                    <td>${rowData[key]}</td>
-                    `,
-                ).join(' ');
+                const deletebutton = document.createElement('button');
+                deletebutton.className = 'btn btn-danger btn-sm text-white fw-bolder';
+                deletebutton.innerText = '✕';
+                deletebutton.addEventListener('click', () => this.props.onDelete(rowData.id));
 
-                rowHtmlElement.innerHTML = `${cellsHtmlString}
-                    <td>
-                    <button class="btn btn-danger btn-sm text-white fw-bolder">
-                    ✕</button>
-                    </td>`;
+                const td = document.createElement('td');
+                td.append(deletebutton);
 
-                return rowHtmlElement;
+                const tr = document.createElement('tr');
+                tr.innerHTML = Object.keys(columns)
+                .map((key) => `<td>${rowData[key]}</td>`)
+                .join(' ');
+                tr.append(td);
+
+                return tr;
             },
         );
 
-        this.tbody.append(...rowsHtlmElements);
+        this.tbody.append(...rows);
     };
 
     renderView = () => {
