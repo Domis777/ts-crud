@@ -64,6 +64,7 @@ class App {
 
   public initialize = (): void => {
   const select = new SelectField({
+    labelText: 'Brands',
     options: [
       { value: ALL_BRAND_ID, text: ALL_BRAND_TITLE },
       ...brands.map(brandToOption),
