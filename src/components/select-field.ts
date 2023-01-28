@@ -31,7 +31,7 @@ class SelectField {
         `).join('');
         this.htmlElement.addEventListener(
             'change',
-             () => this.props.onChange(this.htmlElement.value),
+             () => this.props.onChange?.(this.htmlElement.value),
         );
     };
 }
