@@ -53,6 +53,15 @@ class TextField {
         
         input.value = props.value;
     }
+
+    public updateProps = (props: Partial<TextFieldProps>) => {
+        this.props = {
+            ...this.props,
+            ...props,
+        };
+
+        this.renderView();
+    };
 }
 
 export default TextField
