@@ -84,7 +84,7 @@ class CarsCollection {
         const brand = brands.find((b) => b.id === brandId);
 
         if (!model || !brand) {
-          throw new Error('Netinkami duomenys sukurti automobilį');
+          throw new Error('Bad data input to create a car');
         }
 
         const newCar: Car = {

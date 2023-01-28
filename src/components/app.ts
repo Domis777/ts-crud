@@ -32,7 +32,7 @@ class App {
     const foundElement = document.querySelector<HTMLElement>(selector);
     this.carsCollection = new CarsCollection({ cars, brands, models });
 
-    if (foundElement === null) throw new Error(`Nerastas elementas su selektoriumi '${selector}'`);
+    if (foundElement === null) throw new Error(`Element not found in selector: '${selector}'`);
 
     this.selectedBrandId = ALL_BRAND_ID;
     this.htmlElement = foundElement;
@@ -73,8 +73,8 @@ class App {
 
   const initialBrandId = brands[0].id;
   this.carForm = new CarForm({
-    title: 'Sukurkite naują automobilį',
-    submitBtnText: 'Sukurti',
+    title: 'Create new car',
+    submitBtnText: 'Create',
     values: {
       brand: initialBrandId,
       model: models.filter((m) => m.brandId === initialBrandId)[0].id,
