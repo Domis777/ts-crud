@@ -66,11 +66,9 @@ class CarsCollection {
     };
 
     public deleteCarById = (brandId: string) => {
-        const { cars, models } = this.props;
+        const { cars} = this.props;
 
         this.props.cars = cars.filter((car) => car.id !== brandId);
-        this.props.models = models
-        .filter((model) => model.brandId !== brandId);
     };
 
     public add = ({ modelId, brandId, ...carProps }: CarProps): void => {

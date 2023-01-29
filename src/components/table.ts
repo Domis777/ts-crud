@@ -83,13 +83,14 @@ class Table<Type extends RowData> {
         const { rowsData, columns } = this.props;
 
         this.tbody.innerHTML = '';
-        const rows = rowsData.map(
-            (rowData) => {
+        const rows = rowsData
+        .map((rowData) => {
                 const thisRowIsEdided = this.props.editedCarId === rowData.id;
 
                 const updateButton = document.createElement('button');
                 updateButton.className = `btn btn-${thisRowIsEdided ? 'secondary' : 'warning'} btn-sm fw-bolder`;
                 updateButton.innerText = thisRowIsEdided ? '✕' : '↻';
+                updateButton.addEventListener('click', () => this.props.onEdit(rowData.id));
 
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'btn btn-danger btn-sm text-white fw-bolder';
@@ -102,7 +103,6 @@ class Table<Type extends RowData> {
                     updateButton,
                     deleteButton,
                 );
-                buttonContainer.addEventListener('click', () => this.props.onEdit(rowData.id));
 
                 const td = document.createElement('td');
                 td.append(buttonContainer);
@@ -117,8 +117,7 @@ class Table<Type extends RowData> {
                 tr.append(td);
 
                 return tr;
-            },
-        );
+            });
 
         this.tbody.append(...rows);
     };

@@ -28,7 +28,7 @@ class App {
 
   private carForm: CarForm;
 
-  private editedCarId: string | null;
+  private editedCarId: null | string;
 
   private htmlElement: HTMLElement;
 
@@ -76,13 +76,25 @@ class App {
         price: '',
         year: '',
       },
-      onSubmit: this.handleCreateCar,
       isEdited: 'Create',
+      onSubmit: this.handleCreateCar,
     });
   }
 
   private handleBrandChange = (carId: string): void => {
     this.selectedBrandId = carId;
+    this.renderView();
+  };
+
+  private handleCarDelete = (carId: string) => {
+    this.carsCollection.deleteCarById(carId);
+
+    this.renderView();
+  };
+
+  private handleEditBrand = (carId: string) => {
+    this.editedCarId = carId === this.editedCarId ? null : carId;
+
     this.renderView();
   };
 
@@ -119,18 +131,6 @@ class App {
     }
   };
 
-  private handleCarDelete = (carId: string) => {
-    this.carsCollection.deleteCarById(carId);
-
-    this.renderView();
-  };
-
-  private handleEditBrand = (carId: string) => {
-    this.editedCarId = carId === this.editedCarId ? null : carId;
-
-    this.renderView();
-  };
-
   private renderView = (): void => {
     const { selectedBrandId, carsCollection } = this;
 
@@ -141,7 +141,8 @@ class App {
         editedCarId: this.editedCarId,
       });
     } else {
-      const brand = this.carsCollection.getByBrandTitleId(selectedBrandId);
+      const brand = brands.find((b) => b.id === selectedBrandId);
+      if (brand === undefined) throw new Error('Pasirinkta neegzistuojanti markė');
 
       this.carsTable.updateProps({
         title: brand.title,
