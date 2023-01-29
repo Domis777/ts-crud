@@ -77,7 +77,7 @@ class App {
         year: '1990',
       },
       onSubmit: this.handleCreateCar,
-      isEdited: Boolean(this.editedCarId),
+      isEdited: 'Create',
     });
   }
 
@@ -137,13 +137,13 @@ class App {
       this.carForm.updateProps({
         title: 'Create new car',
         submitBtnText: 'Create',
-        isEdited: true,
+        isEdited: 'Create',
       });
     } else {
       this.carForm.updateProps({
         title: 'Update car',
         submitBtnText: 'Update',
-        isEdited: true,
+        isEdited: 'Update',
       });
     }
   };

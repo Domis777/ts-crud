@@ -15,7 +15,7 @@ type CarFormProps = {
     title: string,
     submitBtnText: string,
     onSubmit: (values: Values) => void,
-    isEdited: boolean
+    isEdited: 'Create' | 'Update'
 };
 
 type Fields = {
@@ -126,7 +126,7 @@ class CarForm {
 
     this.htmlSubmitBtn.innerHTML = submitBtnText;
 
-    if (this.props.isEdited === true) {
+    if (this.props.isEdited === 'Create') {
       this.htmlFormHeader.classList.remove('text-warning');
       this.htmlSubmitBtn.classList.remove('btn-warning');
       this.htmlElement.classList.remove('border-warning');
