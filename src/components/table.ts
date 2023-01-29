@@ -83,13 +83,27 @@ class Table<Type extends RowData> {
         this.tbody.innerHTML = '';
         const rows = rowsData.map(
             (rowData) => {
-                const deletebutton = document.createElement('button');
-                deletebutton.className = 'btn btn-danger btn-sm text-white fw-bolder';
-                deletebutton.innerText = '✕';
-                deletebutton.addEventListener('click', () => this.props.onDelete(rowData.id));
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-danger btn-sm text-white fw-bolder';
+                deleteButton.innerText = '✕';
+                deleteButton.addEventListener('click', () => this.props.onDelete(rowData.id));
+
+                const updateButton = document.createElement('button');
+                updateButton.className = 'btn btn-warning btn-sm fw-bolder';
+                updateButton.innerText = '↻';
+
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'd-flex gap-2 justify-content-end';
+                buttonContainer.append(
+                    updateButton,
+                    deleteButton,
+                );
+                buttonContainer.addEventListener('click', () => (
+                    tr.classList.add('row-active')
+                ));
 
                 const td = document.createElement('td');
-                td.append(deletebutton);
+                td.append(buttonContainer);
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = Object.keys(columns)

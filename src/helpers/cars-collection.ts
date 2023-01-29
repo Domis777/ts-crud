@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import type Car from '../types/car';
 import type Brand from '../types/brand';
 import type Model from '../types/model';
@@ -15,12 +16,6 @@ export type CarProps = {
     price: number,
     year: number
 };
-
-const createId = (): string => String(`${Math.random().toString(36).toUpperCase().slice(2, 10)
- }-${Math.random().toString(36).toUpperCase().slice(2, 6)
- }-${Math.random().toString(36).toUpperCase().slice(2, 6)
- }-${Math.random().toString(36).toUpperCase().slice(2, 6)
- }-${Math.random().toString(36).toUpperCase().slice(2, 14)}`);
 
 class CarsCollection {
     private props: CarsCollectionProps;
@@ -88,7 +83,7 @@ class CarsCollection {
         }
 
         const newCar: Car = {
-          id: createId(),
+          id: uuidv4(),
           ...carProps,
           modelId,
         };
