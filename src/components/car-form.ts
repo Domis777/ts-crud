@@ -4,25 +4,25 @@ import brands from '../data/brands';
 import models from '../data/models';
 
 export type Values = {
-    brand: string,
-    model: string,
-    price: string,
-    year: string,
-  };
+  brand: string,
+  model: string,
+  price: string,
+  year: string,
+};
 
 type CarFormProps = {
-    values: Values,
-    title: string,
-    submitBtnText: string,
-    onSubmit: (values: Values) => void,
-    isEdited: 'Create' | 'Update'
+  values: Values,
+  title: string,
+  submitBtnText: string,
+  onSubmit: (values: Values) => void,
+  isEdited: 'Create' | 'Update'
 };
 
 type Fields = {
-    brand: SelectField,
-    model: SelectField,
-    price: TextField,
-    year: TextField,
+  brand: SelectField,
+  model: SelectField,
+  price: TextField,
+  year: TextField,
   };
 
 class CarForm {
@@ -158,12 +158,12 @@ class CarForm {
   };
 
   public updateProps = (props: Partial<CarFormProps>): void => {
-      this.props = {
-          ...this.props,
-          ...props,
-      };
+    this.props = {
+        ...this.props,
+        ...props,
+    };
 
-      this.renderView();
+    this.renderView();
   };
 }
 

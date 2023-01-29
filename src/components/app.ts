@@ -13,8 +13,8 @@ const ALL_BRAND_ID = '-1' as const;
 const ALL_BRAND_TITLE = 'All Cars';
 
 const brandToOption = ({ id, title }: Brand): OptionType => ({
- value: id,
- text: title,
+  value: id,
+  text: title,
 });
 
 class App {
@@ -83,6 +83,7 @@ class App {
 
   private handleBrandChange = (carId: string): void => {
     this.selectedBrandId = carId;
+
     this.renderView();
   };
 
