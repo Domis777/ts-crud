@@ -10,6 +10,7 @@ export type TableProps<Type> = {
     columns: Type,
     rowsData: Type[],
     onDelete: (id: string) => void
+    onEdit: (id: string) => void
 };
 
 class Table<Type extends RowData> {
@@ -98,9 +99,7 @@ class Table<Type extends RowData> {
                     updateButton,
                     deleteButton,
                 );
-                buttonContainer.addEventListener('click', () => (
-                    tr.classList.add('row-active')
-                ));
+                buttonContainer.addEventListener('click', () => this.props.onEdit(rowData.id));
 
                 const td = document.createElement('td');
                 td.append(buttonContainer);

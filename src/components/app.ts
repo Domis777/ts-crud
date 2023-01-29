@@ -20,6 +20,8 @@ const brandToOption = ({ id, title }: Brand): OptionType => ({
 class App {
   private htmlElement: HTMLElement;
 
+  private editedBrandsId: string | null;
+
   private carsCollection: CarsCollection;
 
   private brandSelect: SelectField;
@@ -37,6 +39,7 @@ class App {
     if (foundElement === null) throw new Error(`Element not found in selector: '${selector}'`);
 
     this.selectedBrandId = ALL_BRAND_ID;
+    this.editedBrandsId = null;
     this.htmlElement = foundElement;
 
     this.carsTable = new Table({
@@ -50,6 +53,7 @@ class App {
       },
       rowsData: this.carsCollection.all.map(strProps),
       onDelete: this.handleCarDelete,
+      onEdit: this.handleEditBrand,
     });
 
     this.brandSelect = new SelectField({
@@ -84,6 +88,12 @@ class App {
   private handleCarDelete = (brandId: string) => {
     this.carsCollection.deleteCarById(brandId);
     this.renderView();
+  };
+
+  private handleEditBrand = (brandId: string) => {
+    this.editedBrandsId = brandId;
+    console.log('Update is active', this.editedBrandsId);
+    console.log(this);
   };
 
   public initialize = (): void => {
