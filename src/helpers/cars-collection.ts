@@ -83,7 +83,7 @@ class CarsCollection {
         }
 
         const newCar: Car = {
-          id: uuidv4(),
+          id: uuidv4().toLocaleUpperCase(),
           ...carProps,
           modelId,
         };
