@@ -81,18 +81,10 @@ class App {
   }
 
   private handleBrandChange = (carId: string): void => {
-    this.selectedBrandId = carId;
+    this.editedCarId = carId === this.editedCarId
+      ? null
+      : carId;
 
-    this.renderView();
-  };
-
-  private handleCarDelete = (brandId: string) => {
-    this.carsCollection.deleteCarById(brandId);
-    this.renderView();
-  };
-
-  private handleEditBrand = (carId: string) => {
-    this.editedCarId = carId;
     this.renderView();
   };
 
@@ -111,6 +103,17 @@ class App {
     this.renderView();
   };
 
+  private handleCarDelete = (brandId: string) => {
+    this.carsCollection.deleteCarById(brandId);
+    this.renderView();
+  };
+
+  private handleEditBrand = (carId: string) => {
+    this.editedCarId = carId;
+    console.log(this.editedCarId);
+    this.renderView();
+  };
+
   private renderView = (): void => {
     const { selectedBrandId, carsCollection } = this;
 
@@ -118,6 +121,7 @@ class App {
       this.carsTable.updateProps({
         title: ALL_BRAND_TITLE,
         rowsData: carsCollection.all.map(strProps),
+        editedCarId: this.editedCarId,
       });
     } else {
       const brand = this.carsCollection.getByBrandTitleId(selectedBrandId);

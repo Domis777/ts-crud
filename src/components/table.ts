@@ -82,8 +82,6 @@ class Table<Type extends RowData> {
     private renderTbody = (): void => {
         const { rowsData, columns } = this.props;
 
-        console.log('refresh');
-
         this.tbody.innerHTML = '';
         const rows = rowsData.map(
             (rowData) => {
@@ -108,6 +106,7 @@ class Table<Type extends RowData> {
                 td.append(buttonContainer);
 
                 const tr = document.createElement('tr');
+                if (this.props.editedCarId === rowData.id) tr.classList.add('row-active');
                 tr.innerHTML = Object.keys(columns)
                 .map((key) => `<td>${rowData[key]}</td>`)
                 .join(' ');
