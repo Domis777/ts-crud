@@ -106,9 +106,7 @@ class App {
   };
 
   private handleEditBrand = (carId: string) => {
-    this.editedCarId = carId === this.editedCarId
-    ? null
-    : carId;
+    this.editedCarId = carId === this.editedCarId ? null : carId;
 
     this.renderView();
   };
