@@ -18,8 +18,6 @@ const brandToOption = ({ id, title }: Brand): OptionType => ({
 });
 
 class App {
-  private htmlElement: HTMLElement;
-
   private editedCarId: string | null;
 
   private carsCollection: CarsCollection;
@@ -31,6 +29,8 @@ class App {
   private carsTable: Table<StrObjProps<CarJoined>>;
 
   private carForm: CarForm;
+
+  private htmlElement: HTMLElement;
 
   constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
@@ -77,6 +77,7 @@ class App {
         year: '1990',
       },
       onSubmit: this.handleCreateCar,
+      isEdited: Boolean(this.editedCarId),
     });
   }
 
@@ -131,6 +132,8 @@ class App {
         editedCarId: this.editedCarId,
       });
     }
+
+    if(this.editedCarId === null)
   };
 
   public initialize = (): void => {

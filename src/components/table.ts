@@ -85,15 +85,16 @@ class Table<Type extends RowData> {
         this.tbody.innerHTML = '';
         const rows = rowsData.map(
             (rowData) => {
+                const thisRowIsEdided = this.props.editedCarId === rowData.id;
+
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'btn btn-danger btn-sm text-white fw-bolder';
                 deleteButton.innerText = '✕';
                 deleteButton.addEventListener('click', () => this.props.onDelete(rowData.id));
 
                 const updateButton = document.createElement('button');
-                updateButton.className = 'btn btn-warning btn-sm fw-bolder';
-                updateButton.innerText = '↻';
-                if (this.props.editedCarId === rowData.id) updateButton.innerText = '✕';
+                updateButton.className = `btn btn-${thisRowIsEdided ? 'secondary' : 'warning'} btn-sm fw-bolder`;
+                updateButton.innerText = thisRowIsEdided ? '✕' : '↻';
 
                 const buttonContainer = document.createElement('div');
                 buttonContainer.className = 'd-flex gap-2 justify-content-end';

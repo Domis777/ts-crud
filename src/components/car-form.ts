@@ -15,6 +15,7 @@ type CarFormProps = {
     title: string,
     submitBtnText: string,
     onSubmit: (values: Values) => void,
+    isEdited: boolean
 };
 
 type Fields = {
@@ -121,6 +122,7 @@ class CarForm {
     const { title, values, submitBtnText } = this.props;
 
     this.htmlFormHeader.innerHTML = title;
+    this.htmlFormHeader.classList.add();
 
     this.htmlSubmitBtn.innerHTML = submitBtnText;
 
