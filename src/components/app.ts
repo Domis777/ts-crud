@@ -69,7 +69,7 @@ class App {
         brand: initialBrandId,
         model: models.filter((m) => m.brandId === initialBrandId)[0].id,
         price: '0',
-        year: '2000',
+        year: '1990',
       },
       onSubmit: this.handleCreateCar,
     });
