@@ -118,14 +118,7 @@ class CarForm {
     onSubmit(formValues);
   };
 
-  private renderView = (): void => {
-    const { title, values, submitBtnText } = this.props;
-
-    this.htmlFormHeader.innerHTML = title;
-    this.htmlFormHeader.classList.add();
-
-    this.htmlSubmitBtn.innerHTML = submitBtnText;
-
+  private isEdidetrenderStyle = () => {
     if (this.props.isEdited === 'Create') {
       this.htmlFormHeader.classList.remove('text-warning');
       this.htmlSubmitBtn.classList.remove('btn-warning');
@@ -141,6 +134,17 @@ class CarForm {
       this.htmlSubmitBtn.classList.add('btn-warning');
       this.htmlElement.classList.add('border-warning');
     }
+  };
+
+  private renderView = (): void => {
+    const { title, values, submitBtnText } = this.props;
+
+    this.htmlFormHeader.innerHTML = title;
+    this.htmlFormHeader.classList.add();
+
+    this.htmlSubmitBtn.innerHTML = submitBtnText;
+
+    this.isEdidetrenderStyle();
 
     const valuesKeyValueArr = Object.entries(values) as [keyof Values, string][];
     valuesKeyValueArr.forEach(([fieldName, fieldValue]) => {

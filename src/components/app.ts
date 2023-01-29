@@ -18,8 +18,6 @@ const brandToOption = ({ id, title }: Brand): OptionType => ({
 });
 
 class App {
-  private editedCarId: string | null;
-
   private carsCollection: CarsCollection;
 
   private brandSelect: SelectField;
@@ -30,17 +28,19 @@ class App {
 
   private carForm: CarForm;
 
+  private editedCarId: string | null;
+
   private htmlElement: HTMLElement;
 
   constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
-    this.carsCollection = new CarsCollection({ cars, brands, models });
 
     if (foundElement === null) throw new Error(`Element not found in selector: '${selector}'`);
 
     this.selectedBrandId = ALL_BRAND_ID;
     this.editedCarId = null;
     this.htmlElement = foundElement;
+    this.carsCollection = new CarsCollection({ cars, brands, models });
 
     this.carsTable = new Table({
       title: ALL_BRAND_TITLE,
@@ -73,8 +73,8 @@ class App {
       values: {
         brand: initialBrandId,
         model: models.filter((m) => m.brandId === initialBrandId)[0].id,
-        price: '0',
-        year: '1990',
+        price: '',
+        year: '',
       },
       onSubmit: this.handleCreateCar,
       isEdited: 'Create',
@@ -101,8 +101,27 @@ class App {
     this.renderView();
   };
 
-  private handleCarDelete = (brandId: string) => {
-    this.carsCollection.deleteCarById(brandId);
+  private handleUpdateCar = ({
+    brand, model, price, year,
+  }: Values): void => {
+    if (this.editedCarId) {
+      const carProps: CarProps = {
+        brandId: brand,
+        modelId: model,
+        price: Number(price),
+        year: Number(year),
+      };
+
+      this.carsCollection.update(this.editedCarId, carProps);
+      this.editedCarId = null;
+
+      this.renderView();
+    }
+  };
+
+  private handleCarDelete = (carId: string) => {
+    this.carsCollection.deleteCarById(carId);
+
     this.renderView();
   };
 
@@ -133,17 +152,45 @@ class App {
       });
     }
 
-    if (this.editedCarId === null) {
-      this.carForm.updateProps({
-        title: 'Create new car',
-        submitBtnText: 'Create',
-        isEdited: 'Create',
-      });
-    } else {
+    if (this.editedCarId) {
+      const editedCar = cars.find((c) => c.id === this.editedCarId);
+      if (!editedCar) {
+        alert('Nėra rasta mašina kurią bandote redaguoti');
+        return;
+      }
+
+      const model = models.find((m) => m.id === editedCar.modelId);
+
+      if (!model) {
+        alert('Nėra rasta mašina kurią bandote redaguoti');
+        return;
+      }
+
       this.carForm.updateProps({
         title: 'Update car',
         submitBtnText: 'Update',
+        values: {
+          brand: model.brandId,
+          model: model.id,
+          price: String(editedCar.price),
+          year: String(editedCar.year),
+        },
         isEdited: 'Update',
+        onSubmit: this.handleUpdateCar,
+      });
+    } else {
+      const initialBrandId = brands[0].id;
+      this.carForm.updateProps({
+        title: 'Create new car',
+        submitBtnText: 'Create',
+        values: {
+          brand: initialBrandId,
+          model: models.filter((m) => m.brandId === initialBrandId)[0].id,
+          price: '',
+          year: '',
+        },
+        isEdited: 'Create',
+        onSubmit: this.handleCreateCar,
       });
     }
   };

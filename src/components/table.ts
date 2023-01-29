@@ -87,14 +87,14 @@ class Table<Type extends RowData> {
             (rowData) => {
                 const thisRowIsEdided = this.props.editedCarId === rowData.id;
 
+                const updateButton = document.createElement('button');
+                updateButton.className = `btn btn-${thisRowIsEdided ? 'secondary' : 'warning'} btn-sm fw-bolder`;
+                updateButton.innerText = thisRowIsEdided ? '✕' : '↻';
+
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'btn btn-danger btn-sm text-white fw-bolder';
                 deleteButton.innerText = '✕';
                 deleteButton.addEventListener('click', () => this.props.onDelete(rowData.id));
-
-                const updateButton = document.createElement('button');
-                updateButton.className = `btn btn-${thisRowIsEdided ? 'secondary' : 'warning'} btn-sm fw-bolder`;
-                updateButton.innerText = thisRowIsEdided ? '✕' : '↻';
 
                 const buttonContainer = document.createElement('div');
                 buttonContainer.className = 'd-flex gap-2 justify-content-end';
@@ -108,7 +108,9 @@ class Table<Type extends RowData> {
                 td.append(buttonContainer);
 
                 const tr = document.createElement('tr');
-                if (this.props.editedCarId === rowData.id) tr.classList.add('row-active');
+                if (this.props.editedCarId === rowData.id) {
+                    tr.classList.add('row-active');
+                }
                 tr.innerHTML = Object.keys(columns)
                 .map((key) => `<td>${rowData[key]}</td>`)
                 .join(' ');
