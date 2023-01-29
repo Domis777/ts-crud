@@ -73,16 +73,16 @@ class CarForm {
   }
 
   private initialize() {
-    this.htmlFormHeader.className = 'h3 text-success text-center';
+    this.htmlFormHeader.className = 'h3 text-center';
 
     const fieldsArr = Object.values(this.fields);
     this.htmlFieldsContainer.className = 'd-flex flex-column gap-2';
     this.htmlFieldsContainer.append(...fieldsArr.map((field) => field.htmlElement));
 
-    this.htmlSubmitBtn.className = 'btn btn-success btn-lg';
+    this.htmlSubmitBtn.className = 'btn btn-lg';
     this.htmlSubmitBtn.type = 'submit';
 
-    this.htmlElement.className = 'card shadow d-flex flex-column gap-3 p-3';
+    this.htmlElement.className = 'card shadow border d-flex flex-column gap-3 p-3';
     this.htmlElement.style.width = '350px';
     this.htmlElement.append(
       this.htmlFormHeader,
@@ -125,6 +125,22 @@ class CarForm {
     this.htmlFormHeader.classList.add();
 
     this.htmlSubmitBtn.innerHTML = submitBtnText;
+
+    if (this.props.isEdited === true) {
+      this.htmlFormHeader.classList.remove('text-warning');
+      this.htmlSubmitBtn.classList.remove('btn-warning');
+      this.htmlElement.classList.remove('border-warning');
+      this.htmlFormHeader.classList.add('text-success');
+      this.htmlSubmitBtn.classList.add('btn-success');
+      this.htmlElement.classList.add('border-success');
+    } else {
+      this.htmlFormHeader.classList.remove('text-success');
+      this.htmlSubmitBtn.classList.remove('btn-success');
+      this.htmlElement.classList.remove('border-success');
+      this.htmlFormHeader.classList.add('text-warning');
+      this.htmlSubmitBtn.classList.add('btn-warning');
+      this.htmlElement.classList.add('border-warning');
+    }
 
     const valuesKeyValueArr = Object.entries(values) as [keyof Values, string][];
     valuesKeyValueArr.forEach(([fieldName, fieldValue]) => {

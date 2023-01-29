@@ -133,7 +133,19 @@ class App {
       });
     }
 
-    if(this.editedCarId === null)
+    if (this.editedCarId === null) {
+      this.carForm.updateProps({
+        title: 'Create new car',
+        submitBtnText: 'Create',
+        isEdited: true,
+      });
+    } else {
+      this.carForm.updateProps({
+        title: 'Update car',
+        submitBtnText: 'Update',
+        isEdited: true,
+      });
+    }
   };
 
   public initialize = (): void => {
