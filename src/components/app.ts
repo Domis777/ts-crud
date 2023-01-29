@@ -20,7 +20,7 @@ const brandToOption = ({ id, title }: Brand): OptionType => ({
 class App {
   private htmlElement: HTMLElement;
 
-  private editedBrandsId: string | null;
+  private editedCarId: string | null;
 
   private carsCollection: CarsCollection;
 
@@ -39,7 +39,7 @@ class App {
     if (foundElement === null) throw new Error(`Element not found in selector: '${selector}'`);
 
     this.selectedBrandId = ALL_BRAND_ID;
-    this.editedBrandsId = null;
+    this.editedCarId = null;
     this.htmlElement = foundElement;
 
     this.carsTable = new Table({
@@ -54,6 +54,7 @@ class App {
       rowsData: this.carsCollection.all.map(strProps),
       onDelete: this.handleCarDelete,
       onEdit: this.handleEditBrand,
+      editedCarId: this.editedCarId,
     });
 
     this.brandSelect = new SelectField({
@@ -90,28 +91,9 @@ class App {
     this.renderView();
   };
 
-  private handleEditBrand = (brandId: string) => {
-    this.editedBrandsId = brandId;
-    console.log('Update is active', this.editedBrandsId);
-    console.log(this);
-  };
-
-  public initialize = (): void => {
-  const uxContainer = document.createElement('div');
-  uxContainer.className = 'd-flex gap-3 align-items-start my-3';
-  uxContainer.append(
-    this.carsTable.htmlElement,
-    this.carForm.htmlElement,
-    );
-
-  const container = document.createElement('div');
-  container.className = 'container d-flex flex-column my-5 gap-3';
-  container.append(
-    this.brandSelect.htmlElement,
-    uxContainer,
-    );
-
-    this.htmlElement.append(container);
+  private handleEditBrand = (carId: string) => {
+    this.editedCarId = carId;
+    this.renderView();
   };
 
   private handleCreateCar = ({
@@ -145,8 +127,27 @@ class App {
         rowsData: carsCollection
         .getByBrandId(selectedBrandId)
         .map(strProps),
+        editedCarId: this.editedCarId,
       });
     }
+  };
+
+  public initialize = (): void => {
+  const uxContainer = document.createElement('div');
+  uxContainer.className = 'd-flex gap-3 align-items-start my-3';
+  uxContainer.append(
+    this.carsTable.htmlElement,
+    this.carForm.htmlElement,
+    );
+
+  const container = document.createElement('div');
+  container.className = 'container d-flex flex-column my-5 gap-3';
+  container.append(
+    this.brandSelect.htmlElement,
+    uxContainer,
+    );
+
+    this.htmlElement.append(container);
   };
 }
 

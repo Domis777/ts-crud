@@ -9,8 +9,9 @@ export type TableProps<Type> = {
     title: string,
     columns: Type,
     rowsData: Type[],
-    onDelete: (id: string) => void
-    onEdit: (id: string) => void
+    editedCarId: string | null,
+    onDelete: (id: string) => void,
+    onEdit: (id: string) => void,
 };
 
 class Table<Type extends RowData> {
@@ -80,6 +81,8 @@ class Table<Type extends RowData> {
 
     private renderTbody = (): void => {
         const { rowsData, columns } = this.props;
+
+        console.log('refresh');
 
         this.tbody.innerHTML = '';
         const rows = rowsData.map(
