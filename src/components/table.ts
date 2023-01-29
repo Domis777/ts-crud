@@ -93,6 +93,7 @@ class Table<Type extends RowData> {
                 const updateButton = document.createElement('button');
                 updateButton.className = 'btn btn-warning btn-sm fw-bolder';
                 updateButton.innerText = '↻';
+                if (this.props.editedCarId === rowData.id) updateButton.innerText = '✕';
 
                 const buttonContainer = document.createElement('div');
                 buttonContainer.className = 'd-flex gap-2 justify-content-end';
