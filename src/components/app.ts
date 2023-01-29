@@ -22,11 +22,13 @@ class App {
 
   private carsCollection: CarsCollection;
 
+  private brandSelect: SelectField;
+
   private selectedBrandId: string;
 
   private carsTable: Table<StrObjProps<CarJoined>>;
 
-  private carForm: CarForm | undefined;
+  private carForm: CarForm;
 
   constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
@@ -49,6 +51,28 @@ class App {
       rowsData: this.carsCollection.all.map(strProps),
       onDelete: this.handleCarDelete,
     });
+
+    this.brandSelect = new SelectField({
+      labelText: 'Brands',
+      options: [
+        { value: ALL_BRAND_ID, text: ALL_BRAND_TITLE },
+        ...brands.map(brandToOption),
+      ],
+      onChange: this.handleBrandChange,
+    });
+
+    const initialBrandId = brands[0].id;
+    this.carForm = new CarForm({
+      title: 'Create new car',
+      submitBtnText: 'Create',
+      values: {
+        brand: initialBrandId,
+        model: models.filter((m) => m.brandId === initialBrandId)[0].id,
+        price: '0',
+        year: '2000',
+      },
+      onSubmit: this.handleCreateCar,
+    });
   }
 
   private handleBrandChange = (carId: string): void => {
@@ -63,34 +87,18 @@ class App {
   };
 
   public initialize = (): void => {
-  const select = new SelectField({
-    labelText: 'Brands',
-    options: [
-      { value: ALL_BRAND_ID, text: ALL_BRAND_TITLE },
-      ...brands.map(brandToOption),
-    ],
-    onChange: this.handleBrandChange,
-  });
-
-  const initialBrandId = brands[0].id;
-  this.carForm = new CarForm({
-    title: 'Create new car',
-    submitBtnText: 'Create',
-    values: {
-      brand: initialBrandId,
-      model: models.filter((m) => m.brandId === initialBrandId)[0].id,
-      price: '0',
-      year: '2000',
-    },
-    onSubmit: this.handleCreateCar,
-  });
+  const uxContainer = document.createElement('div');
+  uxContainer.className = 'd-flex gap-3 align-items-start my-3';
+  uxContainer.append(
+    this.carsTable.htmlElement,
+    this.carForm.htmlElement,
+    );
 
   const container = document.createElement('div');
   container.className = 'container d-flex flex-column my-5 gap-3';
   container.append(
-    select.htmlElement,
-    this.carsTable.htmlElement,
-    this.carForm.htmlElement,
+    this.brandSelect.htmlElement,
+    uxContainer,
     );
 
     this.htmlElement.append(container);
