@@ -89,6 +89,7 @@ class App {
 
   private handleCarDelete = (carId: string) => {
     this.carsCollection.deleteCarById(carId);
+    this.editedCarId = null;
 
     this.renderView();
   };
