@@ -140,7 +140,6 @@ class CarForm {
     const { title, values, submitBtnText } = this.props;
 
     this.htmlFormHeader.innerHTML = title;
-    this.htmlFormHeader.classList.add();
 
     this.htmlSubmitBtn.innerHTML = submitBtnText;
 
